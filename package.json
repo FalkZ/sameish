@@ -1,17 +1,16 @@
 {
-    "version": "0.0.1",
+    "version": "0.0.2",
     "name": "sameish",
     "description": "Library for comparing JavaScript objects, designed with debugging in mind.",
     "author": "Falk Zwimpfer",
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/falkzwimpfer/sameish.git"
+        "url": "git+https://github.com/FalkZ/sameish.git"
     },
     "bugs": {
-        "url": "https://github.com/falkzwimpfer/sameish/issues"
+        "url": "https://github.com/FalkZ/sameish/issues"
     },
-    "homepage": "https://github.com/falkzwimpfer/sameish#readme",
     "exports": {
         ".": {
             "import": "./build/sameish.ts",
