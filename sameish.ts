@@ -2,9 +2,28 @@ import deepGet from "dlv";
 import { dset as deepSet } from "dset";
 import equals from "fast-deep-equal";
 import stringify from "fast-json-stable-stringify";
-import type { Paths } from "type-fest";
 
 import { diff } from "@vitest/utils/diff";
+
+type Primitive = string | number | boolean | bigint | symbol | undefined | null;
+
+type NonRecursiveType = Primitive | Function | Date | RegExp;
+
+export type Paths<T> = T extends NonRecursiveType
+    ? never
+    : T extends readonly unknown[]
+      ? number extends T["length"]
+          ? `${number}` | `${number}.${Paths<T[number]>}`
+          : keyof T & `${number}` extends infer K extends string
+            ? K | `${K}.${Paths<T[K & keyof T]>}`
+            : never
+      : T extends object
+        ? {
+              [K in keyof T & (string | number)]:
+                  | `${K}`
+                  | `${K}.${Paths<T[K]>}`;
+          }[keyof T & (string | number)]
+        : never;
 
 const withUndefined = (obj: unknown): unknown => {
     if (obj === undefined)
@@ -26,14 +45,8 @@ export type SameishArgs<Before, After> = {
     after: After;
     logDiff?: boolean;
     logFunction?: (diff: string) => void;
-    comparePaths?: Paths<Before & After>[];
-    ignoreOrderPaths?: Paths<Before & After>[];
-};
-
-type NormalizeArgs = {
-    obj: unknown;
-    comparePaths: string[] | undefined;
-    ignoreOrderPaths: string[] | undefined;
+    comparePaths?: Paths<Before | After>[];
+    ignoreOrderPaths?: Paths<Before | After>[];
 };
 
 const normalize = (
