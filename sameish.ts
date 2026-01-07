@@ -31,20 +31,25 @@ export type SameishArgs<Before, After> = {
 };
 
 type NormalizeArgs = {
-    obj: object;
-    comparePaths?: string[];
-    ignoreOrderPaths?: string[];
+    obj: unknown;
+    comparePaths: string[] | undefined;
+    ignoreOrderPaths: string[] | undefined;
 };
-const normalize = ({ obj, comparePaths, ignoreOrderPaths }: NormalizeArgs) => {
-    let clone = {};
+
+const normalize = (
+    obj: object,
+    comparePaths: string[] | undefined,
+    ignoreOrderPaths: string[] | undefined,
+) => {
+    let clone: object = {};
 
     if (comparePaths && comparePaths.length) {
         for (const path of comparePaths) {
-            const value = deepGet(obj, path);
+            const value = deepGet(obj as object, path);
             deepSet(clone, path, value);
         }
     } else {
-        clone = structuredClone(obj);
+        clone = structuredClone(obj as object);
     }
 
     if (ignoreOrderPaths) {
@@ -71,16 +76,16 @@ export const sameish = <Before, After>({
     logDiff,
     logFunction = console.log,
 }: SameishArgs<Before, After>) => {
-    const beforeNormalized = normalize({
-        obj: before,
-        comparePaths,
-        ignoreOrderPaths,
-    });
-    const afterNormalized = normalize({
-        obj: after,
-        comparePaths,
-        ignoreOrderPaths,
-    });
+    const beforeNormalized = normalize(
+        before as object,
+        comparePaths as string[] | undefined,
+        ignoreOrderPaths as string[] | undefined,
+    );
+    const afterNormalized = normalize(
+        after as object,
+        comparePaths as string[] | undefined,
+        ignoreOrderPaths as string[] | undefined,
+    );
 
     if (logDiff) {
         const diffLog = diff(afterNormalized, beforeNormalized, {

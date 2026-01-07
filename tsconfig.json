@@ -1,3 +1,4 @@
 {
-  "extends": "ijw/typescript",
+    "extends": "ijw/typescript",
+    "include": ["sameish.ts"],
 }
