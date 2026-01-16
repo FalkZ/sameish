@@ -8,9 +8,6 @@
         "type": "git",
         "url": "git+https://github.com/FalkZ/sameish.git"
     },
-    "bugs": {
-        "url": "https://github.com/FalkZ/sameish/issues"
-    },
     "exports": {
         ".": {
             "import": "./build/sameish.js",
@@ -35,10 +32,8 @@
     ],
     "type": "module",
     "devDependencies": {
-        "@types/bun": "latest",
         "@types/dlv": "^1.1.5",
         "@vitest/utils": "^4.0.16",
-        "ajv": "^8.17.1",
         "bun-plugin-dts": "^0.3.0",
         "dlv": "^1.1.3",
         "dset": "^3.1.4",
@@ -49,7 +44,6 @@
         "prettier": "^3.7.4",
         "typescript": "^5.9.3",
         "vite": "^7.3.1",
-        "vite-bundle-analyzer": "^1.3.2",
         "vite-plugin-dts": "^4.5.4"
     },
     "peerDependencies": {},
