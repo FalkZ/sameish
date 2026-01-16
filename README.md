@@ -92,3 +92,24 @@ sameish({
     logFunction: (diff) => myLogger.debug(diff),
 });
 ```
+
+# Optimize Bundle Size
+
+If you are worried of bundle size in production, you can use the optimized version of `sameish`. E.g. in vite:
+
+```typescript
+export default defineConfig(({ mode }) => ({
+    resolve: {
+        alias: mode === "production" ? { sameish: "sameish/optimized" } : {},
+    },
+}));
+```
+
+This will massively reduce the bundle size, since the human readable diff will not be bundled.
+
+Here are the size differences:
+
+| Import              |     Size |  Gzipped |
+| :------------------ | -------: | -------: |
+| `sameish`           | 48.77 kB | 14.08 kB |
+| `sameish/optimized` |  4.11 kB |  1.57 kB |

@@ -1,5 +1,5 @@
 {
-    "version": "0.0.2",
+    "version": "0.0.3",
     "name": "sameish",
     "description": "Library for comparing JavaScript objects, designed with debugging in mind.",
     "author": "Falk Zwimpfer",
@@ -13,9 +13,16 @@
     },
     "exports": {
         ".": {
-            "import": "./build/sameish.ts",
+            "import": "./build/sameish.js",
             "types": "./build/sameish.d.ts"
+        },
+        "./optimized": {
+            "import": "./build/sameish-optimized.js",
+            "types": "./build/sameish-optimized.d.ts"
         }
+    },
+    "scripts": {
+        "build": "vite build"
     },
     "files": [
         "build"
@@ -30,17 +37,20 @@
     "devDependencies": {
         "@types/bun": "latest",
         "@types/dlv": "^1.1.5",
+        "@vitest/utils": "^4.0.16",
+        "ajv": "^8.17.1",
         "bun-plugin-dts": "^0.3.0",
+        "dlv": "^1.1.3",
+        "dset": "^3.1.4",
         "eslint": "^9.39.2",
+        "fast-deep-equal": "^3.1.3",
+        "fast-json-stable-stringify": "^2.1.0",
         "ijw": "^0.0.9",
         "prettier": "^3.7.4",
         "typescript": "^5.9.3",
+        "vite": "^7.3.1",
         "vite-bundle-analyzer": "^1.3.2",
-        "@vitest/utils": "^4.0.16",
-        "dlv": "^1.1.3",
-        "dset": "^3.1.4",
-        "fast-deep-equal": "^3.1.3",
-        "fast-json-stable-stringify": "^2.1.0"
+        "vite-plugin-dts": "^4.5.4"
     },
     "peerDependencies": {},
     "dependencies": {},
