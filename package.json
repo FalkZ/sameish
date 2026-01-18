@@ -1,5 +1,5 @@
 {
-    "version": "0.0.3",
+    "version": "0.0.4",
     "name": "sameish",
     "description": "Library for comparing JavaScript objects, designed with debugging in mind.",
     "author": "Falk Zwimpfer",
@@ -8,6 +8,7 @@
         "type": "git",
         "url": "git+https://github.com/FalkZ/sameish.git"
     },
+    "types": "./build/sameish.d.ts",
     "exports": {
         ".": {
             "import": "./build/sameish.js",
